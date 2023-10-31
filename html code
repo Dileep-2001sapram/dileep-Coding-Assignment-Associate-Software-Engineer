@@ -1,0 +1,145 @@
+A. Create a basic calculator using HTML, CSS, and JavaScript with the functionality of add, subtract, multiply and divide. Use the following picture for reference.  
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Basic Calculator</title>
+<style>
+body {
+  font-family: sans-serif;
+}
+
+input, button {
+  width: 100px;
+  margin: 5px;
+}
+
+#result {
+  width: 200px;
+}
+</style>
+</head>
+<body>
+<h1>Basic Calculator</h1>
+<input type="number" id="first-number">
+<input type="number" id="second-number">
+<button type="button" id="add-button">+</button>
+<button type="button" id="subtract-button">-</button>
+<button type="button" id="multiply-button">*</button>
+<button type="button" id="divide-button">/</button>
+<input type="number" id="result">
+<script>
+const addButton = document.getElementById("add-button");
+addButton.addEventListener("click", add);
+const subtractButton = document.getElementById("subtract-button");
+subtractButton.addEventListener("click", subtract);
+const multiplyButton = document.getElementById("multiply-button");
+multiplyButton.addEventListener("click", multiply);
+const divideButton = document.getElementById("divide-button");
+divideButton.addEventListener("click", divide);
+function add() {
+  const firstNumber = parseInt(document.getElementById("first-number").value);
+  const secondNumber = parseInt(document.getElementById("second-number").value);
+  const result = firstNumber + secondNumber;
+  document.getElementById("result").value = result;
+}
+
+function subtract() {
+  const firstNumber = parseInt(document.getElementById("first-number").value);
+  const secondNumber = parseInt(document.getElementById("second-number").value);
+  const result = firstNumber - secondNumber;
+  document.getElementById("result").value = result;
+}
+  
+function multiply() {
+  const firstNumber = parseInt(document.getElementById("first-number").value);
+  const secondNumber = parseInt(document.getElementById("second-number").value);
+  const result = firstNumber * secondNumber;
+  document.getElementById("result").value = result;
+}
+
+function divide() {
+  const firstNumber = parseInt(document.getElementById("first-number").value);
+  const secondNumber = parseInt(document.getElementById("second-number").value);
+  const result = firstNumber / secondNumber;
+  document.getElementById("result").value = result;
+}
+</script>
+</body>
+</html>
+B. Create a survey form with Fields; First Name, Last Name, Date of Birth, Country (dropdown), Gender (checkbox), Profession, email, and mobile number. All the input fields are necessary to submit the form. Create two buttons Submit and Reset. Reset will reset the form while clicking on submit, first, it will check all the fields and necessary validations and then a popup will appear displaying all the selected values with the label in front of it. 
+On closing the popup, the form should reset all the values. Use the following for reference
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Survey Form</title>
+  <style>
+    body {
+  font-family: sans-serif;
+}
+input, select, button {
+  width: 100px;
+  margin: 5px;
+}
+
+#submit-button {
+  background-color: green;
+}
+
+#reset-button {
+  background-color: red;
+}
+  </style>
+</head>
+<body>
+  <h1>Survey Form</h1>
+
+  <form id="survey-form">
+    <input type="text" name="first_name" placeholder="First Name" required>
+    <input type="text" name="last_name" placeholder="Last Name" required>
+    <input type="date" name="date_of_birth" placeholder="Date of Birth" required>
+  <select name="country" required>
+    <option value="">Select a country...</option>
+    <option value="India">India</option>
+    <option value="United States">United States</option>
+    <option value="United Kingdom">United Kingdom</option>
+  </select>
+    <input type="checkbox" name="gender" value="male" required> Male
+    <input type="checkbox" name="gender" value="female" required> Female
+    <input type="text" name="profession" placeholder="Profession" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="tel" name="mobile_number" placeholder="Mobile Number" required>
+    <button type="submit" id="submit-button">Submit</button>
+    <button type="reset" id="reset-button">Reset</button>
+  </form>
+  <script> 
+const submitButton = document.getElementById("submit-button");
+submitButton.addEventListener("click", submitForm);
+function submitForm() {
+  const firstNameField = document.querySelector("[name='first_name']");
+  const lastNameField = document.querySelector("[name='last_name']");
+  const dateOfBirthField = document.querySelector("[name='date_of_birth']");
+  const countryField = document.querySelector("[name='country']");
+  const genderFields = document.querySelectorAll("[name='gender']");
+  const professionField = document.querySelector("[name='profession']");
+  const emailField = document.querySelector("[name='email']");
+  const mobileNumberField = document.querySelector("[name='mobile_number']");
+
+  if (firstNameField.value === "" || lastNameField.value === "" || dateOfBirthField.value === "" || countryField.value === "" || !genderFields.some((field) => field.checked) || professionField.value === "" || emailField.value === "" || mobileNumberField.value === "") {
+    alert("Please fill in all the required fields.");
+    return;
+  }
+  const formData = new FormData(document.querySelector("#survey-form"));
+  const popup = window.open("", "", "width=400,height=400");
+  popup.document.write("<h1>Survey Results</h1>");
+  for (const [key, value] of formData.entries()) {
+    popup.document.write(`<p>${key}: ${value}</p>`);
+  }
+  popup.document.write("<button type='button' onclick='window.close()'>Close</button>");
+  document.querySelector("#survey-form").reset();
+}
+  </script>
+</body>
+</html>
+
